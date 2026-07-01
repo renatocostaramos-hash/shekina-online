@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Almoço Missionários · V.Pião</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: #f4f7fa;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      max-width: 520px;
+      width: 100%;
+      background: white;
+      padding: 24px 20px 28px;
+      border-radius: 28px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transition: 0.2s;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a2634;
+      text-align: center;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+    .subhead {
+      text-align: center;
+      color: #5b6f82;
+      font-size: 15px;
+      margin-top: -2px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e9edf2;
+      padding-bottom: 14px;
+    }
+    .subhead strong {
+      color: #1f3a4b;
+      font-weight: 600;
+    }
+    /* ---- formulário ---- */
+    label {
+      font-weight: 600;
+      font-size: 14px;
+      display: block;
+      margin: 16px 0 4px;
+      color: #1f2a36;
+    }
+    label:first-of-type {
+      margin-top: 4px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 13px 14px;
+      font-size: 15px;
+      border-radius: 14px;
+      border: 1px solid #dbe0e6;
+      background: white;
+      font-family: inherit;
+      transition: 0.15s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #2b7a4b;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(43, 122, 75, 0.15);
+    }
+    textarea {
+      min-height: 64px;
+      resize: vertical;
+    }
+    .qtd-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .qtd-row label {
+      margin: 0;
+      min-width: 80px;
+      font-size: 14px;
+    }
+    .qtd-row input {
+      margin-top: 0;
+      flex: 1;
+    }
+    .qtd-label {
+      font-weight: 600;
+      font-size: 14px;
+      color: #1f2a36;
+      white-space: nowrap;
+    }
+    .btn-whatsapp {
+      background: #1f8b4c;
+      color: white;
+      border: none;
+      font-weight: 600;
+      font-size: 17px;
+      padding: 15px;
+      margin-top: 18px;
+      border-radius: 40px;
+      box-shadow: 0 4px 8px rgba(26, 115, 60, 0.2);
+      cursor: pointer;
+      transition: 0.15s;
+      letter-spacing: 0.3px;
+    }
+    .btn-whatsapp:hover {
+      background: #19733e;
+      transform: scale(0.98);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    hr {
+      margin: 28px 0 18px;
+      border: 0;
+      height: 1px;
+      background: #e2e8ef;
+    }
+    .admin-toggle {
+      background: #eef2f6;
+      border: 1px solid #d0d8e0;
+      color: #1f3a4b;
+      font-weight: 500;
+      padding: 12px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.15s;
+      margin-top: 6px;
+      font-size: 15px;
+    }
+    .admin-toggle:hover {
+      background: #e2e8f0;
+    }
+    /* admin panel */
+    .admin-section {
+      display: none;
+      margin-top: 18px;
+      border-top: 2px dashed #dce3ec;
+      padding-top: 20px;
+    }
+    .password-box {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .password-box input {
+      flex: 2;
+      min-width: 140px;
+    }
+    .password-box button {
+      flex: 1;
+      min-width: 90px;
+      background: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      font-weight: 500;
+      padding: 13px 16px;
+      cursor: pointer;
+    }
+    .admin-content {
+      display: none;
+    }
+    .stats {
+      background: #f0f4fa;
+      padding: 16px 14px;
+      border-radius: 20px;
+      margin: 12px 0 18px;
+    }
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid #dce3ec;
+      font-size: 15px;
+    }
+    .stats-row:last-child {
+      border-bottom: none;
+      font-weight: 700;
+      border-top: 2px solid #bcc8d6;
+      margin-top: 6px;
+      padding-top: 10px;
+    }
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      margin: 14px 0 12px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      flex: 1;
+      min-width: 70px;
+      padding: 10px 6px;
+      background: #ecf0f5;
+      border: 1px solid #cdd7e2;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.1s;
+      text-align: center;
+    }
+    .filter-btn.active {
+      background: #1f3a4b;
+      border-color: #1f3a4b;
+      color: white;
+    }
+    .pedido-card {
+      background: #f8faff;
+      border: 1px solid #e2e9f2;
+      border-radius: 18px;
+      padding: 15px 16px;
+      margin-top: 12px;
+    }
+    .pedido-card .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px 6px;
+    }
+    .pedido-card .nome {
+      font-weight: 700;
+      font-size: 16px;
+      color: #0b1e2b;
+    }
+    .pedido-card .detalhe {
+      color: #2c4053;
+      font-size: 14px;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 14px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .status-pago {
+      background: #d4edda;
+      color: #0f5e31;
+    }
+    .status-pendente {
+      background: #ffe6cc;
+      color: #a1491e;
+    }
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .card-actions button {
+      flex: 1;
+      min-width: 100px;
+      padding: 10px 8px;
+      border-radius: 40px;
+      border: none;
+      font-weight: 500;
+      font-size: 13px;
+      background: #eef2f6;
+      color: #1f2a36;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+    .card-actions .btn-pago {
+      background: #1f8b4c;
+      color: white;
+    }
+    .card-actions .btn-pago:hover {
+      background: #16723e;
+    }
+    .card-actions .btn-excluir {
+      background: #e74c3c;
+      color: white;
+    }
+    .card-actions .btn-excluir:hover {
+      background: #c0392b;
+    }
+    .vazio {
+      text-align: center;
+      color: #7a8a9a;
+      padding: 20px 0 12px;
+    }
+    .btn-sair {
+      background: #6c7a8a;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 40px;
+      font-weight: 500;
+      margin-top: 18px;
+      cursor: pointer;
+    }
+    .btn-sair:hover {
+      background: #4f5f70;
+    }
+    small.obs {
+      color: #5f7385;
+      font-size: 13px;
+    }
+    /* pagamento */
+    .payment-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .payment-option {
+      flex: 1;
+      min-width: 70px;
+      padding: 10px 6px;
+      background: #ecf0f5;
+      border: 2px solid transparent;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.1s;
+      text-align: center;
+    }
+    .payment-option.selected {
+      border-color: #1f8b4c;
+      background: #e6f2ea;
+      color: #0f5e31;
+    }
+    .payment-option input {
+      display: none;
+    }
+    .qtd-dupla {
+      background: #f8faff;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid #e2e9f2;
+      margin-top: 4px;
+    }
+    .qtd-dupla .qtd-row:last-child {
+      margin-bottom: 0;
+    }
+    @media (max-width: 440px) {
+      .container { padding: 18px 14px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>🍽️ Almoço Missionários</h1>
+  <div class="subhead">
+    <strong>Igreja Metodista V.Pião</strong> · 19/07/2026
+  </div>
+
+  <!-- ÁREA CLIENTE -->
+  <div id="clienteArea">
+    <label for="nome">Nome do cliente</label>
+    <input type="text" id="nome" placeholder="Ex: Ana Silva" autocomplete="off">
+
+    <label>Quantidades por prato</label>
+    <div class="qtd-dupla">
+      <div class="qtd-row">
+        <label for="qtdFrango">🍗 Frango</label>
+        <input type="number" id="qtdFrango" min="0" max="10" value="0">
+      </div>
+      <div class="qtd-row">
+        <label for="qtdPernil">🥩 Pernil</label>
+        <input type="number" id="qtdPernil" min="0" max="10" value="0">
+      </div>
+      <div class="qtd-row">
+        <label for="qtdVegetariano">🥗 Vegetariano</label>
+        <input type="number" id="qtdVegetariano" min="0" max="10" value="0">
+      </div>
+    </div>
+
+    <label for="observacao">Observações <small class="obs">(opcional)</small></label>
+    <textarea id="observacao" placeholder="ex: sem cebola, molho extra..."></textarea>
+
+    <label>Forma de pagamento</label>
+    <div class="payment-group" id="paymentGroup">
+      <label class="payment-option selected" onclick="selectPayment(this)">
+        <input type="radio" name="payment" value="Pix" checked> 💳 Pix
+      </label>
+      <label class="payment-option" onclick="selectPayment(this)">
+        <input type="radio" name="payment" value="Dinheiro"> 💵 Dinheiro
+      </label>
+      <label class="payment-option" onclick="selectPayment(this)">
+        <input type="radio" name="payment" value="Crédito"> 💳 Crédito
+      </label>
+      <label class="payment-option" onclick="selectPayment(this)">
+        <input type="radio" name="payment" value="Débito"> 💳 Débito
+      </label>
+    </div>
+
+    <label for="vendedor">Vendido por</label>
+    <input type="text" id="vendedor" placeholder="Nome de quem vendeu" autocomplete="off">
+
+    <button class="btn-whatsapp" onclick="enviarPedido()">
+      📱 Enviar pedido via WhatsApp
+    </button>
+  </div>
+
+  <hr>
+
+  <!-- ACESSO ADMIN -->
+  <button class="admin-toggle" onclick="mostrarAdmin()">🔐 Acessar administração</button>
+
+  <div id="adminSection" class="admin-section">
+    <div id="passwordArea">
+      <div class="password-box">
+        <input type="password" id="senhaInput" placeholder="Senha administrativa">
+        <button onclick="verificarSenha()">Entrar</button>
+      </div>
+    </div>
+
+    <div id="adminContent" class="admin-content">
+      <h2 style="font-size:20px; margin: 6px 0 8px;">📊 Painel de pedidos</h2>
+
+      <div class="stats">
+        <div class="stats-row"><span>Frango Assado</span><span id="qtdFrangoTotal">0</span></div>
+        <div class="stats-row"><span>Pernil de Porco</span><span id="qtdPernilTotal">0</span></div>
+        <div class="stats-row"><span>Vegetariano</span><span id="qtdVegetarianoTotal">0</span></div>
+        <div class="stats-row"><span>🧾 Total pedidos</span><span id="qtdTotalPedidos">0</span></div>
+        <div class="stats-row"><span>🥡 Total quentinhos</span><span id="qtdTotalQuentinhos">0</span></div>
+      </div>
+
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="todos" onclick="filtrarPedidos('todos')">Todos</button>
+        <button class="filter-btn" data-filter="Pendente" onclick="filtrarPedidos('Pendente')">Pendentes</button>
+        <button class="filter-btn" data-filter="Pago" onclick="filtrarPedidos('Pago')">Pagos</button>
+      </div>
+
+      <div id="listaPedidos"></div>
+
+      <button class="btn-sair" onclick="sairAdmin()">Sair da administração</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const SENHA = "1995";
+    let adminLogado = false;
+    let filtroAtual = 'todos';
+    let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+
+    // helpers
+    function salvar() {
+      localStorage.setItem('pedidos', JSON.stringify(pedidos));
+      if (adminLogado) {
+        atualizarQuantidades();
+        renderizarPedidos();
+      }
+    }
+
+    function atualizarQuantidades() {
+      let frango=0, pernil=0, veg=0, total=0;
+      pedidos.forEach(p => {
+        const qFrango = p.qtdFrango || 0;
+        const qPernil = p.qtdPernil || 0;
+        const qVeg = p.qtdVegetariano || 0;
+        total += qFrango + qPernil + qVeg;
+        frango += qFrango;
+        pernil += qPernil;
+        veg += qVeg;
+      });
+      document.getElementById('qtdFrangoTotal').textContent = frango;
+      document.getElementById('qtdPernilTotal').textContent = pernil;
+      document.getElementById('qtdVegetarianoTotal').textContent = veg;
+      document.getElementById('qtdTotalPedidos').textContent = pedidos.length;
+      document.getElementById('qtdTotalQuentinhos').textContent = total;
+    }
+
+    function renderizarPedidos() {
+      const container = document.getElementById('listaPedidos');
+      container.innerHTML = '';
+
+      let lista = pedidos;
+      if (filtroAtual !== 'todos') {
+        lista = pedidos.filter(p => p.status === filtroAtual);
+      }
+
+      if (lista.length === 0) {
+        container.innerHTML = '<div class="vazio">📭 Nenhum pedido com esse filtro</div>';
+        return;
+      }
+
+      lista.forEach((p, idx) => {
+        const realIndex = pedidos.indexOf(p);
+        const statusClass = p.status === 'Pago' ? 'status-pago' : 'status-pendente';
+        
+        // Montar string dos itens
+        let itens = [];
+        if (p.qtdFrango > 0) itens.push(`🍗 Frango: ${p.qtdFrango}`);
+        if (p.qtdPernil > 0) itens.push(`🥩 Pernil: ${p.qtdPernil}`);
+        if (p.qtdVegetariano > 0) itens.push(`🥗 Vegetariano: ${p.qtdVegetariano}`);
+        const itensStr = itens.join(' | ') || 'Nenhum item';
+        
+        container.innerHTML += `
+          <div class="pedido-card">
+            <div class="row">
+              <span class="nome">${p.nome}</span>
+              <span class="status-badge ${statusClass}">${p.status}</span>
+            </div>
+            <div class="detalhe" style="margin-top:4px;">${itensStr}</div>
+            ${p.pagamento ? `<div class="detalhe" style="margin-top:2px;">💳 ${p.pagamento}</div>` : ''}
+            ${p.vendedor ? `<div class="detalhe" style="margin-top:2px;">👤 Vendedor: ${p.vendedor}</div>` : ''}
+            ${p.observacao ? `<div class="detalhe" style="margin-top:4px; color:#3d5568;">📝 ${p.observacao}</div>` : ''}
+            <div class="card-actions">
+              <button class="btn-pago" onclick="alterarStatus(${realIndex})">
+                ${p.status === 'Pendente' ? '✅ Marcar pago' : '↩️ Pendente'}
+              </button>
+              <button class="btn-excluir" onclick="excluirPedido(${realIndex})">🗑️ Dar baixa</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // EXPORT para os botões
+    window.alterarStatus = function(i) {
+      if (!adminLogado) return;
+      pedidos[i].status = (pedidos[i].status === 'Pendente') ? 'Pago' : 'Pendente';
+      salvar();
+    };
+
+    window.excluirPedido = function(i) {
+      if (!adminLogado) return;
+      if (confirm('Dar baixa neste pedido?')) {
+        pedidos.splice(i, 1);
+        salvar();
+      }
+    };
+
+    window.filtrarPedidos = function(filtro) {
+      if (!adminLogado) return;
+      filtroAtual = filtro;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filtro);
+      });
+      renderizarPedidos();
+    };
+
+    window.mostrarAdmin = function() {
+      document.getElementById('adminSection').style.display = 'block';
+      document.getElementById('passwordArea').style.display = 'block';
+      document.getElementById('adminContent').style.display = 'none';
+      document.getElementById('senhaInput').value = '';
+      document.getElementById('senhaInput').focus();
+    };
+
+    window.verificarSenha = function() {
+      const input = document.getElementById('senhaInput');
+      if (input.value === SENHA) {
+        adminLogado = true;
+        document.getElementById('passwordArea').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+        filtroAtual = 'todos';
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.filter === 'todos');
+        });
+        atualizarQuantidades();
+        renderizarPedidos();
+      } else {
+        alert('Senha incorreta');
+        input.value = '';
+        input.focus();
+      }
+    };
+
+    window.sairAdmin = function() {
+      adminLogado = false;
+      document.getElementById('adminSection').style.display = 'none';
+      document.getElementById('passwordArea').style.display = 'block';
+      document.getElementById('adminContent').style.display = 'none';
+    };
+
+    // Selecionar pagamento
+    window.selectPayment = function(el) {
+      document.querySelectorAll('.payment-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      el.classList.add('selected');
+      const radio = el.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+    };
+
+    // ENVIAR PEDIDO (cliente)
+    window.enviarPedido = function() {
+      const nome = document.getElementById('nome').value.trim();
+      const qtdFrango = parseInt(document.getElementById('qtdFrango').value) || 0;
+      const qtdPernil = parseInt(document.getElementById('qtdPernil').value) || 0;
+      const qtdVegetariano = parseInt(document.getElementById('qtdVegetariano').value) || 0;
+      const observacao = document.getElementById('observacao').value.trim();
+      const vendedor = document.getElementById('vendedor').value.trim();
+      
+      // pegar pagamento selecionado
+      const selectedPayment = document.querySelector('.payment-option.selected');
+      const pagamento = selectedPayment ? selectedPayment.textContent.trim() : 'Pix';
+
+      const totalItens = qtdFrango + qtdPernil + qtdVegetariano;
+
+      if (!nome) {
+        alert('Por favor, digite o nome do cliente.');
+        return;
+      }
+      if (totalItens === 0) {
+        alert('Adicione pelo menos um item (Frango, Pernil ou Vegetariano).');
+        return;
+      }
+      if (totalItens > 10) {
+        alert('O total de itens não pode ultrapassar 10.');
+        return;
+      }
+      if (!vendedor) {
+        alert('Por favor, digite o nome de quem vendeu.');
+        return;
+      }
+
+      // Montar resumo dos itens para o WhatsApp
+      let itensResumo = [];
+      if (qtdFrango > 0) itensResumo.push(`🍗 Frango: ${qtdFrango}`);
+      if (qtdPernil > 0) itensResumo.push(`🥩 Pernil: ${qtdPernil}`);
+      if (qtdVegetariano > 0) itensResumo.push(`🥗 Vegetariano: ${qtdVegetariano}`);
+      const itensStr = itensResumo.join(' | ');
+
+      const pedido = {
+        nome,
+        qtdFrango,
+        qtdPernil,
+        qtdVegetariano,
+        observacao: observacao || 'Nenhuma',
+        pagamento: pagamento,
+        vendedor: vendedor,
+        status: 'Pendente',
+        data: '2026-07-19'
+      };
+      pedidos.push(pedido);
+      salvar();
+
+      const msg = `*NOVO PEDIDO - ALMOÇO MISSIONÁRIOS*%0A📅 19/07/2026%0A🏠 Igreja Metodista V.Pião%0A%0A👤 Cliente: ${nome}%0A📦 Itens: ${itensStr}%0A💳 Pagamento: ${pagamento}%0A👤 Vendedor: ${vendedor}%0A📌 Status: Pendente%0A%0A📝 Obs: ${observacao || 'Nenhuma'}`;
+
+      window.open(`https://wa.me/5524993176829?text=${msg}`, '_blank');
+
+      // limpa campos
+      document.getElementById('nome').value = '';
+      document.getElementById('qtdFrango').value = '0';
+      document.getElementById('qtdPernil').value = '0';
+      document.getElementById('qtdVegetariano').value = '0';
+      document.getElementById('observacao').value = '';
+      document.getElementById('vendedor').value = '';
+    };
+
+    // enter na senha
+    document.getElementById('senhaInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') verificarSenha();
+    });
+
+    // inicializa visuais
+    renderizarPedidos();
+    atualizarQuantidades();
+  })();
+</script>
+</body>
+</html>
