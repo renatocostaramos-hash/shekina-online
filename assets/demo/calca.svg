@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="Calça jeans">
+  <rect width="300" height="400" fill="#e7e9ee"/>
+  <circle cx="150" cy="140" r="96" fill="#dde1e9"/>
+  <path d="M100 78 L200 78 L206 300 L166 300 L152 176 L148 176 L134 300 L94 300 Z" fill="#40506e"/>
+  <rect x="100" y="78" width="100" height="14" fill="#33405a"/>
+</svg>

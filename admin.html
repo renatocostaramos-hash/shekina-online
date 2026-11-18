@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administração · Bella Moda</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body class="admin">
+  <header class="adm-top">
+    <div class="adm-top-inner">
+      <span class="brand">Bella<span>Moda</span> · Administração</span>
+      <a class="voltar" href="/">← Ver loja</a>
+    </div>
+  </header>
+
+  <main class="adm-main">
+    <!-- login -->
+    <section id="login" class="adm-login">
+      <h1>Área restrita</h1>
+      <p>Digite a senha para gerenciar produtos e vendas.</p>
+      <form id="formLogin" class="form">
+        <label>
+          Senha
+          <input id="senha" type="password" autocomplete="current-password" required>
+        </label>
+        <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+        <div id="loginErro" class="adm-erro"></div>
+      </form>
+    </section>
+
+    <!-- painel -->
+    <div id="app" hidden>
+      <div class="adm-tabs">
+        <button class="adm-tab active" type="button" data-aba="produtos">Produtos</button>
+        <button class="adm-tab" type="button" data-aba="vendas">Relatório de vendas</button>
+        <button class="adm-tab" type="button" data-aba="sair" style="margin-left:auto">Sair</button>
+      </div>
+
+      <section id="abaProdutos">
+        <div class="painel">
+          <h2 id="tituloForm">Novo produto</h2>
+          <p class="sub">Cadastre as peças com foto em JPG ou PNG.</p>
+
+          <form id="formProduto" class="form">
+            <div class="grade-form">
+              <label class="span-2">Nome da peça
+                <input id="pNome" type="text" required maxlength="80">
+              </label>
+              <label>Preço (R$)
+                <input id="pPreco" type="text" inputmode="decimal" placeholder="89,90" required>
+              </label>
+              <label>Categoria
+                <input id="pCategoria" type="text" placeholder="Vestidos" maxlength="40">
+              </label>
+              <label>Tamanhos
+                <input id="pTamanhos" type="text" placeholder="P, M, G" maxlength="40">
+              </label>
+              <label>Situação
+                <select id="pAtivo">
+                  <option value="sim">À venda</option>
+                  <option value="nao">Fora do catálogo</option>
+                </select>
+              </label>
+              <label class="span-2">Descrição
+                <textarea id="pDescricao" rows="2" maxlength="220"></textarea>
+              </label>
+            </div>
+
+            <div class="upload" style="margin-top:12px">
+              <div class="preview" id="pPreview">👗</div>
+              <div class="campo">
+                <input id="pImagem" type="file" accept="image/png,image/jpeg">
+                <small>JPG ou PNG, até 4 MB.</small>
+                <button class="btn btn-ghost" type="button" id="btnRemoverFoto" style="padding:0;font-size:12px">
+                  Remover foto
+                </button>
+              </div>
+            </div>
+
+            <div class="form-acoes">
+              <button class="btn btn-primary" type="submit" id="btnSalvar">Salvar produto</button>
+              <button class="btn btn-outline" type="button" id="btnCancelarEdicao" hidden>
+                Cancelar edição
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="painel">
+          <h2>Produtos cadastrados</h2>
+          <p class="sub" id="contagemProdutos"></p>
+          <div id="listaProdutos" class="lista-produtos"></div>
+        </div>
+      </section>
+
+      <section id="abaVendas" hidden>
+        <div class="painel">
+          <h2>Relatório de vendas</h2>
+          <p class="sub">Acompanhe o faturamento e envie a nota de compra ao cliente.</p>
+          <div class="chips" id="filtroPeriodo">
+            <button class="chip" type="button" data-periodo="hoje">Hoje</button>
+            <button class="chip active" type="button" data-periodo="7">7 dias</button>
+            <button class="chip" type="button" data-periodo="30">30 dias</button>
+            <button class="chip" type="button" data-periodo="todos">Tudo</button>
+          </div>
+          <div class="stats" id="statsVendas" style="margin-top:14px"></div>
+          <div id="topProdutos" style="margin-top:16px"></div>
+        </div>
+
+        <div class="painel">
+          <h2>Pedidos</h2>
+          <p class="sub" id="contagemPedidos"></p>
+          <div id="listaPedidos"></div>
+          <div class="form-acoes">
+            <button class="btn btn-outline" type="button" id="btnExportar">Exportar relatório (CSV)</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- nota de compra -->
+  <div id="recibo" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head no-print">
+        <h2>Nota de compra</h2>
+        <button class="icon-btn" type="button" data-fechar-recibo aria-label="Fechar">✕</button>
+      </div>
+      <div id="reciboConteudo" class="recibo"></div>
+      <div class="form-acoes no-print">
+        <button class="btn btn-outline" type="button" data-imprimir-recibo>Imprimir / salvar PDF</button>
+        <a id="reciboLinkCliente" class="btn btn-whats" target="_blank" rel="noopener">Enviar ao cliente</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/common.js"></script>
+  <script src="/assets/admin.js"></script>
+</body>
+</html>

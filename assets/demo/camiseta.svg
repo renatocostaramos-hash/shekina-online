@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="Camiseta">
+  <rect width="300" height="400" fill="#f1e8dc"/>
+  <circle cx="150" cy="120" r="96" fill="#e9dccb"/>
+  <path d="M105 95 L75 110 L52 150 L78 172 L98 152 L98 305 Q150 318 202 305 L202 152 L222 172 L248 150 L225 110 L195 95 Q150 122 105 95 Z" fill="#9c4a32"/>
+  <path d="M105 95 Q150 122 195 95" fill="none" stroke="#7f3b27" stroke-width="6"/>
+</svg>

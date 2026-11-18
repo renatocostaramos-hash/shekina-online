@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bella Moda · Loja de roupas</title>
+  <meta name="description" content="Loja de roupas Bella Moda: escolha suas peças, monte o carrinho e finalize o pedido pelo WhatsApp.">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">Bella<span>Moda</span></a>
+      <div class="search">
+        <input id="busca" type="search" placeholder="Buscar peças..." aria-label="Buscar peças">
+      </div>
+      <button id="abrirCarrinho" class="cart-btn" type="button" aria-label="Abrir carrinho">
+        🛍️ <span class="label">Carrinho</span>
+        <span id="cartBadge" class="badge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Nova coleção</p>
+      <h1>Peças que vestem bem e duram</h1>
+      <p class="hero-sub">
+        Escolha seus tamanhos, monte o carrinho e finalize o pedido direto no WhatsApp.
+      </p>
+      <a href="#catalogo" class="btn btn-primary">Ver produtos</a>
+    </div>
+  </section>
+
+  <main id="catalogo" class="wrap">
+    <div class="catalogo-head">
+      <h2>Catálogo</h2>
+      <div id="filtros" class="chips"></div>
+    </div>
+    <div id="grade" class="grade"></div>
+    <div id="vazioCatalogo" class="vazio" hidden>
+      <strong>Nenhuma peça encontrada</strong>
+      Tente outra busca ou volte em breve para novidades.
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <p>Bella Moda · Pedidos pelo WhatsApp (21) 96801-5350</p>
+    <p style="margin-top: 8px;">
+      <a href="/admin.html">Acessar administração</a>
+    </p>
+  </footer>
+
+  <div id="scrim" class="scrim" hidden></div>
+
+  <aside id="drawer" class="drawer" aria-label="Carrinho de compras" aria-hidden="true">
+    <div class="drawer-head">
+      <h2>Seu carrinho</h2>
+      <button class="icon-btn" type="button" data-fechar-carrinho aria-label="Fechar carrinho">✕</button>
+    </div>
+    <div id="carrinhoItens" class="drawer-body"></div>
+    <div class="drawer-foot">
+      <div class="total-linha">
+        <span>Total</span>
+        <strong id="carrinhoTotal">R$ 0,00</strong>
+      </div>
+      <button id="irCheckout" class="btn btn-primary btn-block" type="button">Finalizar pedido</button>
+      <p class="mini">O pedido é confirmado pelo WhatsApp da loja.</p>
+    </div>
+  </aside>
+
+  <!-- checkout -->
+  <div id="checkout" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2>Finalizar pedido</h2>
+        <button class="icon-btn" type="button" data-fechar-checkout aria-label="Fechar">✕</button>
+      </div>
+      <form id="formCheckout" class="form">
+        <label>
+          Seu nome
+          <input id="cliNome" type="text" autocomplete="name" required>
+        </label>
+        <label>
+          WhatsApp com DDD
+          <input id="cliTelefone" type="tel" inputmode="tel" placeholder="(21) 99999-9999" required>
+        </label>
+
+        <div class="seg" id="segEntrega">
+          <label class="seg-opt active">
+            <input type="radio" name="entrega" value="Entrega" checked> Entrega
+          </label>
+          <label class="seg-opt">
+            <input type="radio" name="entrega" value="Retirada"> Retirar na loja
+          </label>
+        </div>
+
+        <label id="campoEndereco">
+          Endereço para entrega
+          <input id="cliEndereco" type="text" placeholder="Rua, número, bairro">
+        </label>
+
+        <label>
+          Forma de pagamento
+          <select id="cliPagamento">
+            <option value="Pix">Pix</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão">Cartão</option>
+          </select>
+        </label>
+
+        <label>
+          Observações (opcional)
+          <textarea id="cliObs" rows="2" placeholder="Ex.: entregar depois das 18h"></textarea>
+        </label>
+
+        <div class="resumo" id="resumoCheckout"></div>
+
+        <button id="btnEnviarPedido" class="btn btn-whats btn-block" type="submit">
+          Enviar pedido pelo WhatsApp
+        </button>
+        <p class="mini">Pedido e nota de compra são enviados pelo WhatsApp.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- sucesso -->
+  <div id="sucesso" class="modal" hidden>
+    <div class="modal-card center">
+      <div class="ok-icon">✓</div>
+      <h2>Pedido #<span id="sucessoNumero"></span> registrado</h2>
+      <p class="muted">
+        Guardamos seu pedido. Envie para a loja e leve sua nota de compra no WhatsApp.
+      </p>
+      <a id="linkLoja" class="btn btn-whats btn-block" target="_blank" rel="noopener">
+        Enviar pedido para a loja
+      </a>
+      <a id="linkCliente" class="btn btn-outline btn-block" target="_blank" rel="noopener">
+        Enviar nota de compra para mim
+      </a>
+      <button class="btn btn-ghost btn-block" type="button" data-abrir-recibo>
+        Ver nota de compra
+      </button>
+    </div>
+  </div>
+
+  <!-- nota de compra -->
+  <div id="recibo" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head no-print">
+        <h2>Nota de compra</h2>
+        <button class="icon-btn" type="button" data-fechar-recibo aria-label="Fechar">✕</button>
+      </div>
+      <div id="reciboConteudo" class="recibo"></div>
+      <div class="form-acoes no-print">
+        <button class="btn btn-outline" type="button" data-imprimir-recibo>Imprimir / salvar PDF</button>
+        <a id="reciboLinkCliente" class="btn btn-whats" target="_blank" rel="noopener">Enviar no WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/common.js"></script>
+  <script src="/assets/store.js"></script>
+</body>
+</html>

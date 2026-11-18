@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="Vestido">
+  <rect width="300" height="400" fill="#ece4d6"/>
+  <circle cx="150" cy="130" r="94" fill="#e3d8c6"/>
+  <path d="M112 86 L100 102 L120 126 L92 300 Q150 318 208 300 L180 126 L200 102 L188 86 Q150 110 112 86 Z" fill="#7c7a4f"/>
+  <path d="M120 126 Q150 140 180 126" fill="none" stroke="#64623f" stroke-width="5"/>
+</svg>
