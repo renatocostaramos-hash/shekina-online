@@ -1256,6 +1256,32 @@ body.admin {
     gap: 14px;
   }
 
+  /* Cards no mobile: altura do texto previsível para o botão ficar sempre alinhado. */
+  .card-produto .nome {
+    min-height: 2.5em;
+  }
+
+  .card-produto .desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-produto .acoes {
+    flex-wrap: nowrap;
+    margin-top: 10px;
+  }
+
+  .card-produto select,
+  .card-produto .acoes .btn {
+    min-height: 40px;
+  }
+
+  .card-produto .acoes .btn {
+    white-space: nowrap;
+  }
+
   .grade-form {
     grid-template-columns: 1fr;
   }
@@ -1267,6 +1293,22 @@ body.admin {
   .linha-produto .acoes {
     grid-column: 1 / -1;
     justify-content: flex-end;
+  }
+}
+
+/* Cards estreitos (celular): tamanho e botão empilhados, sem cortar o botão. */
+@media (max-width: 480px) {
+  .card-produto .acoes {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-produto select {
+    width: 100%;
+  }
+
+  .card-produto .acoes .btn {
+    width: 100%;
   }
 }
 
