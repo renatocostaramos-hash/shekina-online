@@ -3,7 +3,7 @@
   const CART_KEY = 'bellamoda.carrinho.v1';
   const TOKEN_KEY = 'bellamoda.admin.token';
 
-  const config = { nome: 'Bella Moda', whatsapp: '5521968015350' };
+  const config = { nome: 'AlexMultMarcas', whatsapp: '5521968015350' };
 
   function money(valor) {
     return Number(valor || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });

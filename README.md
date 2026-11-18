@@ -1,4 +1,4 @@
-# Bella Moda · Loja de roupas
+# AlexMultMarcas · Loja de roupas
 
 Loja de roupas com catálogo, carrinho e finalização do pedido pelo WhatsApp,
 mais um painel administrativo para cadastrar produtos (com foto JPG/PNG),
@@ -30,4 +30,4 @@ para a API Node. Os dados (produtos, pedidos e fotos) ficam no volume `store-dat
 
 - **Senha da administração:** `alex2025` (padrão em `server/index.js`, variável `ADMIN_PASSWORD`).
 - **WhatsApp que recebe os pedidos:** `5521968015350` (variável `STORE_WHATSAPP`).
-- **Nome da loja:** `Bella Moda` (variável `STORE_NAME`).
+- **Nome da loja:** `AlexMultMarcas` (variável `STORE_NAME`).

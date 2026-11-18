@@ -7,7 +7,7 @@ const db = require('./db');
 
 const PORT = Number(process.env.PORT || 4000);
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'alex2025';
-const STORE_NAME = process.env.STORE_NAME || 'Bella Moda';
+const STORE_NAME = process.env.STORE_NAME || 'AlexMultMarcas';
 const STORE_WHATSAPP = String(process.env.STORE_WHATSAPP || '5521968015350').replace(/\D/g, '');
 const MAX_BODY = 8 * 1024 * 1024;
 const TOKEN_TTL = 12 * 60 * 60 * 1000;
